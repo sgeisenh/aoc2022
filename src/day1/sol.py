@@ -1,20 +1,11 @@
 import fileinput
+import heapq
 
-lines = [line.strip() for line in fileinput.input()]
+sections = "\n".join(line.strip() for line in fileinput.input()).split("\n\n")
+top_three = heapq.nlargest(
+    3,
+    (sum(int(food) for food in section.splitlines()) for section in sections),
+)
 
-elves = []
-curr = 0
-for line in lines:
-    if not line:
-        elves.append(curr)
-        curr = 0
-    else:
-        curr += int(line)
-
-elves.append(curr)
-
-p1 = max(elves)
-print("Part one:", p1)
-
-p2 = sum(sorted(elves, reverse=True)[:3])
-print("Part two:", p2)
+print("Part one:", max(top_three))
+print("Part two:", sum(top_three))
