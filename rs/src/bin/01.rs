@@ -1,10 +1,14 @@
-fn process_input(input: &str) -> Vec<i32> {
-    let mut elves: Vec<i32> = input
+#![feature(binary_heap_into_iter_sorted)]
+
+use std::collections::BinaryHeap;
+
+fn process_input(input: &str) -> BinaryHeap<i32> {
+    input
         .split("\n\n")
         .map(str::trim)
         .map(|section| {
             section
-                .split("\n")
+                .split('\n')
                 .map(|line| {
                     line.trim()
                         .parse::<i32>()
@@ -12,23 +16,20 @@ fn process_input(input: &str) -> Vec<i32> {
                 })
                 .sum()
         })
-        .collect();
-    elves.sort();
-    elves.reverse();
-    elves
+        .collect()
 }
 
-fn part1(elves: &[i32]) -> i32 {
-    elves[0]
+fn part1(elves: &BinaryHeap<i32>) -> i32 {
+    *elves.peek().expect("Should be at least one elf")
 }
 
-fn part2(elves: &[i32]) -> i32 {
-    elves.iter().take(3).sum()
+fn part2(elves: BinaryHeap<i32>) -> i32 {
+    elves.into_iter_sorted().take(3).sum()
 }
 
 fn main() {
     let input = include_str!("../../../src/01/input.txt");
-    let mut processed = process_input(input);
-    println!("Part 1: {}", part1(&processed));
-    println!("Part 2: {}", part2(&mut processed));
+    let input = process_input(input);
+    println!("Part 1: {}", part1(&input));
+    println!("Part 2: {}", part2(input));
 }
