@@ -21,7 +21,7 @@ p1 = sum(
 print("Part one:", p1)
 
 p2 = sum(
-    item_to_priority(next(iter(reduce(operator.and_, map(set, lines[idx : idx + 3])))))
-    for idx in range(0, len(lines), 3)
+    item_to_priority(next(iter(reduce(operator.and_, map(set, chunk)))))
+    for chunk in zip(*([iter(lines)] * 3), strict=True)
 )
 print("Part two:", p2)
