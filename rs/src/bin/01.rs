@@ -30,6 +30,6 @@ fn part2(elves: BinaryHeap<i32>) -> i32 {
 fn main() {
     let input = include_str!("../../../src/01/input.txt");
     let input = process_input(input);
-    println!("Part 1: {}", part1(&input));
-    println!("Part 2: {}", part2(input));
+    println!("Part one: {}", part1(&input));
+    println!("Part two: {}", part2(input));
 }
