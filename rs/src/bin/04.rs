@@ -5,13 +5,13 @@ fn process_input(input: &str) -> Vec<Ranges> {
         .lines()
         .map(str::trim)
         .map(|line| {
-            let ranges = line.split(",").collect::<Vec<_>>();
+            let ranges = line.split(',').collect::<Vec<_>>();
             let left = ranges[0]
-                .split("-")
+                .split('-')
                 .map(|section| section.parse().unwrap())
                 .collect::<Vec<i32>>();
             let right = ranges[1]
-                .split("-")
+                .split('-')
                 .map(|section| section.parse().unwrap())
                 .collect::<Vec<i32>>();
             Ranges((left[0], left[1]), (right[0], right[1]))
