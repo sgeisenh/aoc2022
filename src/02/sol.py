@@ -1,87 +1,44 @@
-import fileinput
+from typing import Iterable
+
+from read_input import read_input
 
 
-def create_input() -> list[tuple[str, str]]:
-    result = []
-    for line in fileinput.input():
-        them, me = line.strip().split()
-        result.append((them, me))
-    return result
+def part_one(lines: Iterable[str]) -> int:
+    scores = {
+        "A X": 4,
+        "A Y": 8,
+        "A Z": 3,
+        "B X": 1,
+        "B Y": 5,
+        "B Z": 9,
+        "C X": 7,
+        "C Y": 2,
+        "C Z": 6,
+    }
+    return sum(scores[line] for line in lines)
 
 
-def part_one(rounds: list[tuple[str, str]]) -> int:
-    score = 0
-    for them, me in rounds:
-        match me:
-            case "X":
-                score += 1
-                match them:
-                    case "A":
-                        score += 3
-                    case "B":
-                        score += 0
-                    case "C":
-                        score += 6
-            case "Y":
-                score += 2
-                match them:
-                    case "A":
-                        score += 6
-                    case "B":
-                        score += 3
-                    case "C":
-                        score += 0
-            case "Z":
-                score += 3
-                match them:
-                    case "A":
-                        score += 0
-                    case "B":
-                        score += 6
-                    case "C":
-                        score += 3
-    return score
+def part_two(lines: Iterable[str]) -> int:
+    scores = {
+        "A X": 3,
+        "A Y": 4,
+        "A Z": 8,
+        "B X": 1,
+        "B Y": 5,
+        "B Z": 9,
+        "C X": 2,
+        "C Y": 6,
+        "C Z": 7,
+    }
+    return sum(scores[line] for line in lines)
 
 
-def part_two(rounds: list[tuple[str, str]]) -> int:
-    score = 0
-    for them, me in rounds:
-        match me:
-            case "X":
-                score += 0
-                match them:
-                    case "A":
-                        score += 3
-                    case "B":
-                        score += 1
-                    case "C":
-                        score += 2
-            case "Y":
-                score += 3
-                match them:
-                    case "A":
-                        score += 1
-                    case "B":
-                        score += 2
-                    case "C":
-                        score += 3
-            case "Z":
-                score += 6
-                match them:
-                    case "A":
-                        score += 2
-                    case "B":
-                        score += 3
-                    case "C":
-                        score += 1
-    return score
-
-
-def main() -> None:
-    input = create_input()
+def main() -> int:
+    input = read_input().splitlines()
     print(f"Part one: {part_one(input)}")
     print(f"Part two: {part_two(input)}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
