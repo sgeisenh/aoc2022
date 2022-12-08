@@ -1,12 +1,22 @@
-import fileinput
+from typing import Iterable
 
-lines = [line.strip() for line in fileinput.input()]
-nums = [int(line) for line in lines]
+from read_input import read_input
 
-p1 = 0
 
-print("Part one:", p1)
+def part_one(lines: Iterable[str]):
+    return 0
 
-p2 = 0
 
-print("Part two:", p2)
+def part_two(lines: Iterable[str]):
+    return 0
+
+
+def main() -> int:
+    lines = [line.strip() for line in read_input().splitlines()]
+    print(f"Part one: {part_one(lines)}")
+    print(f"Part two: {part_two(lines)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
