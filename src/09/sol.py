@@ -29,24 +29,9 @@ DIRECTIONS: dict[str, tuple[int, int]] = {
 }
 
 
-def part_one(lines: Iterable[str]) -> int:
+def solve(lines: Iterable[str], knots: int) -> int:
     hx, hy = 0, 0
-    tail = (0, 0)
-    tail_set: set[tuple[int, int]] = {tail}
-    for line in lines:
-        direction, steps = line.split()
-        dx, dy = DIRECTIONS[direction]
-        for _ in range(int(steps)):
-            hx += dx
-            hy += dy
-            tail = get_new_tail((hx, hy), tail)
-            tail_set.add(tail)
-    return len(tail_set)
-
-
-def part_two(lines: Iterable[str]) -> int:
-    hx, hy = 0, 0
-    tails = [(0, 0)] * 9
+    tails = [(0, 0)] * (knots - 1)
     tail_set = {tails[-1]}
     for line in lines:
         direction, steps = line.split()
@@ -63,6 +48,14 @@ def part_two(lines: Iterable[str]) -> int:
             tails = new_tails
             tail_set.add(tails[-1])
     return len(tail_set)
+
+
+def part_one(lines: Iterable[str]) -> int:
+    return solve(lines, 2)
+
+
+def part_two(lines: Iterable[str]) -> int:
+    return solve(lines, 10)
 
 
 def main() -> int:
