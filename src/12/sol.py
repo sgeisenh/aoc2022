@@ -8,8 +8,13 @@ def process_input(input: str) -> list[list[str]]:
     return [list(line.strip()) for line in input.strip().splitlines()]
 
 
-def bfs(grid: Sequence[Sequence[str]], starts: Iterable[tuple[int, int]]) -> int | None:
-    seen = set(starts)
+def bfs(grid: Sequence[Sequence[str]], letters: Iterable[str]) -> int | None:
+    seen = {
+        (r, c)
+        for r, row in enumerate(grid)
+        for c, val in enumerate(row)
+        if val in letters
+    }
     frontier: Deque[tuple[int, int, int]] = deque((r, c, 0) for r, c in seen)
 
     while frontier:
@@ -44,27 +49,11 @@ def bfs(grid: Sequence[Sequence[str]], starts: Iterable[tuple[int, int]]) -> int
 
 
 def part_one(grid: Sequence[Sequence[str]]) -> int | None:
-    return bfs(
-        grid,
-        (
-            (r, c)
-            for r, row in enumerate(grid)
-            for c, val in enumerate(row)
-            if val == "S"
-        ),
-    )
+    return bfs(grid, "S")
 
 
 def part_two(grid: Sequence[Sequence[str]]) -> int | None:
-    return bfs(
-        grid,
-        (
-            (r, c)
-            for r, row in enumerate(grid)
-            for c, val in enumerate(row)
-            if val in "Sa"
-        ),
-    )
+    return bfs(grid, "Sa")
 
 
 def main() -> int:
