@@ -42,7 +42,8 @@ def part_one(cave: Cave) -> int:
     while True:
         x, y = 500, 0
         while y < lowest:
-            for nx, ny in [(x, y + 1), (x - 1, y + 1), (x + 1, y + 1)]:
+            ny = y + 1
+            for nx in [x, x - 1, x + 1]:
                 if (nx, ny) not in occupied:
                     break
             else:
