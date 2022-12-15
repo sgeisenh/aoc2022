@@ -3,7 +3,7 @@ from typing import Iterable
 from read_input import read_input
 
 
-def dist(x1: int, y1: int, x2: int, y2: int):
+def dist(x1: int, y1: int, x2: int, y2: int) -> int:
     return abs(x1 - x2) + abs(y1 - y2)
 
 
@@ -12,14 +12,14 @@ def process_input(lines: Iterable[str]) -> list[tuple[int, int, int, int]]:
     for line in lines:
         line = line.strip()
         line = line.removeprefix("Sensor at x=")
-        sx, line = line.split(", ", 1)
-        sx = int(sx)
+        sxs, line = line.split(", ", 1)
+        sx = int(sxs)
         line = line.removeprefix("y=")
-        sy, line = line.split(": ", 1)
-        sy = int(sy)
+        sys, line = line.split(": ", 1)
+        sy = int(sys)
         line = line.removeprefix("closest beacon is at x=")
-        bx, line = line.split(", ")
-        bx = int(bx)
+        bxs, line = line.split(", ")
+        bx = int(bxs)
         by = int(line.removeprefix("y="))
         result.append((sx, sy, bx, by))
     return result
@@ -46,7 +46,7 @@ def part_one(pairs: Iterable[tuple[int, int, int, int]]) -> int:
     return total
 
 
-def part_two(pairs: Iterable[tuple[int, int, int, int]]):
+def part_two(pairs: Iterable[tuple[int, int, int, int]]) -> int:
     with_distances = []
 
     for sx, sy, bx, by in pairs:
@@ -71,6 +71,8 @@ def part_two(pairs: Iterable[tuple[int, int, int, int]]):
             pr = max(pr, right)
         if pr < 4000000:
             return 4000000 * (pr + 1) + y
+
+    raise ValueError("Unreachable")
 
 
 def main() -> int:
